@@ -39,8 +39,8 @@ redis-cli -h ${REDIS_HOST} -p ${REDIS_PORT} --rdb /backup/$BACKUP_SET
 echo "Backup size:"
 du -hs "/backup/$BACKUP_SET"
 
-echo "Tarring -> backup/$BACKUP_SET.tar"
-tar -cvf "/backup/$BACKUP_SET.tar" "backup/$BACKUP_SET"
+echo "Tarring -> /backup/$BACKUP_SET.tar"
+tar -cvf "/backup/$BACKUP_SET.tar" "/backup/$BACKUP_SET"
 
 echo "Zipping -> backup/$BACKUP_SET.tar.gz"
 gzip -9 "/backup/$BACKUP_SET.tar"
