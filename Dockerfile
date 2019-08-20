@@ -1,4 +1,4 @@
-FROM redis
+FROM redis:5.0.5
 
 RUN apt-get update && apt-get install -y curl python2.7
 # Install google cloud sdk (gcloud and gsutil used in backup.sh)
