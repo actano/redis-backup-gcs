@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eo pipefail
+
 if [ -z $REDIS_HOST ] ; then
     echo "You must specify a REDIS_HOST env var"
     exit 1
@@ -34,13 +36,13 @@ echo "Beginning backup from $REDIS_HOST to /backup/$BACKUP_SET"
 echo "To google storage bucket $GCS_BUCKET_REDIS using credentials located at $GOOGLE_APPLICATION_CREDENTIALS"
 echo "============================================================"
 
-redis-cli -h ${REDIS_HOST} -p ${REDIS_PORT} --rdb /backup/$BACKUP_SET
+redis-cli -h ${REDIS_HOST} -p ${REDIS_PORT} -a ${REDIS_PASSWORD} --rdb /backup/dump.rdb
 
 echo "Backup size:"
-du -hs "/backup/$BACKUP_SET"
+du -hs "/backup/dump.rdb"
 
 echo "Tarring -> /backup/$BACKUP_SET.tar"
-tar -xzvf "/backup/$BACKUP_SET.tar.gz" "/backup/$BACKUP_SET"
+tar -xzvf "/backup/$BACKUP_SET.tar.gz" "/backup/dump.rdb"
 
 echo "Zipped backup size:"
 du -hs "/backup/$BACKUP_SET.tar.gz"
