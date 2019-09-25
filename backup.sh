@@ -40,10 +40,7 @@ echo "Backup size:"
 du -hs "/backup/$BACKUP_SET"
 
 echo "Tarring -> /backup/$BACKUP_SET.tar"
-tar -cvf "/backup/$BACKUP_SET.tar" "/backup/$BACKUP_SET"
-
-echo "Zipping -> backup/$BACKUP_SET.tar.gz"
-gzip -9 "/backup/$BACKUP_SET.tar"
+tar -xzvf "/backup/$BACKUP_SET.tar.gz" "/backup/$BACKUP_SET"
 
 echo "Zipped backup size:"
 du -hs "/backup/$BACKUP_SET.tar.gz"
