@@ -36,8 +36,9 @@ echo "Beginning backup from $REDIS_HOST to /backup/$BACKUP_SET"
 echo "To google storage bucket $GCS_BUCKET_REDIS using credentials located at $GOOGLE_APPLICATION_CREDENTIALS"
 echo "============================================================"
 
-redis-cli -h ${REDIS_HOST} -p ${REDIS_PORT} -a ${REDIS_PASSWORD} --rdb /backup/dump.rdb
+redis-cli -h ${REDIS_HOST} -p ${REDIS_PORT} -a ${REDIS_PASSWORD} --rdb "/backup/dump.rdb"
 
+ls -al "/backup"
 echo "Backup size:"
 du -hs "/backup/dump.rdb"
 
