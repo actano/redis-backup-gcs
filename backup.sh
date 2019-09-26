@@ -40,14 +40,16 @@ echo "Beginning backup from $REDIS_HOST to /backup/$BACKUP_SET"
 echo "To google storage bucket $GCS_BUCKET_REDIS using credentials located at $GOOGLE_APPLICATION_CREDENTIALS"
 echo "============================================================"
 
-redis-cli -h ${REDIS_HOST} -p ${REDIS_PORT} -a ${REDIS_PASSWORD} --rdb "/backup/dump.rdb"
+redis-cli -h ${REDIS_HOST} -p ${REDIS_PORT} -a ${REDIS_PASSWORD} --rdb /backup/${BACKUP_SET}
 
-ls -al "/backup"
 echo "Backup size:"
-du -hs "/backup/dump.rdb"
+du -hs "/backup/$BACKUP_SET"
 
 echo "Tarring -> /backup/$BACKUP_SET.tar"
-tar -xzvf "/backup/$BACKUP_SET.tar.gz" "/backup/dump.rdb"
+tar -cvf "/backup/$BACKUP_SET.tar" "/backup/$BACKUP_SET"
+
+echo "Zipping -> backup/$BACKUP_SET.tar.gz"
+gzip -9 "/backup/$BACKUP_SET.tar"
 
 echo "Zipped backup size:"
 du -hs "/backup/$BACKUP_SET.tar.gz"
