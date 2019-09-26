@@ -10,6 +10,10 @@ if [ -z $REDIS_PORT ] ; then
     echo "You must specify a REDIS_PORT env var"
     exit 1
 fi
+if [ -z REDIS_PASSWORD ] ; then
+    echo "You must specify a REDIS_PASSWORD env var"
+    exit 1
+fi
 
 if [ -z $GCS_BUCKET_REDIS ]; then
     echo "You must specify a google cloud storage GCS_BUCKET_REDIS address such as gs://my-backups/"

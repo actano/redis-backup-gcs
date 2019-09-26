@@ -10,6 +10,8 @@ Set the following environment variables for the Docker container:
 
 `REDIS_PORT` Port of redis db
 
+`REDIS_PASSWORD` Password of redis db
+
 `GCS_BUCKET_REDIS` Google Cloud Storage bucket name
 
 `BACKUP_NAME` Name of the backup file, will be appended by the current date
